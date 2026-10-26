@@ -4,8 +4,8 @@ import DownloadPdf from "@/components/DownloadPdf.astro";
 import Profile from "@/components/Profile.astro";
 import ResumeText from "@/components/ResumeText.astro";
 import "@/styles/global.css";
-import config from "../../resume.config.mjs";
-import { fontFaceCss, fonts as fontCatalog, fontStack } from "../../scripts/fonts.mjs";
+import config from "../../resume.config.ts";
+import { fontFaceCss, fonts as fontCatalog, fontStack } from "../../scripts/fonts.ts";
 
 const fontUrls = Object.fromEntries(
   Object.entries(import.meta.glob<string>("../fonts/*.woff2", { query: "?url", import: "default", eager: true }))

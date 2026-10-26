@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync } from "node:fs";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import config from "../resume.config.mjs";
+import config from "../resume.config.ts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const localCompiler = fileURLToPath(new URL("../.tools/typst/typst", import.meta.url));
@@ -24,7 +24,7 @@ const privateData = "resume.private.yaml";
  * resume.private.yaml and write to the git-ignored out/ folder, never public/,
  * so private details cannot end up in the deployed site.
  */
-export function buildResume({ isPrivate = false } = {}) {
+export function buildResume({ isPrivate = false }: { isPrivate?: boolean } = {}) {
   const outDir = isPrivate ? "out" : "public";
   const output = `${outDir}/${isPrivate ? "resume-private.pdf" : "resume.pdf"}`;
   const inputs = [...typstInputs];

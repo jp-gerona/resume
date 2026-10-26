@@ -1,5 +1,4 @@
-// @ts-check
-import { defineConfig } from "./scripts/config.mjs";
+import { defineConfig } from "./scripts/config.ts";
 
 // Settings for the web page and PDF build. The content lives in src/content/resume/resume.yaml.
 export default defineConfig({

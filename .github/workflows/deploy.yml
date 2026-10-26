@@ -29,9 +29,11 @@ jobs:
         run: sudo apt-get update && sudo apt-get install --yes poppler-utils
       - name: Install, build, and upload
         uses: withastro/action@v6
+        with:
+          node-version: 24
       # Runs after the upload, but a failure here still blocks the deploy job.
       - name: Check web page and PDF contain the same data
-        run: node scripts/check-drift.mjs
+        run: node scripts/check-drift.ts
 
   # Builds the blank starter so it keeps matching the schema and both templates.
   starter:

@@ -3,7 +3,7 @@ import { getEntry } from "astro:content";
 import Icon from "@/components/Icon.astro";
 import type { IconName } from "@/icons";
 import { icons } from "@/icons";
-import config from "../../resume.config.mjs";
+import config from "../../resume.config.ts";
 
 const entry = await getEntry("resume", "resume");
 if (!entry) {
@@ -24,7 +24,7 @@ const websiteHost = site.website && new URL(site.website).hostname;
   <nav class="socials" aria-label="Profile links">
     {site.socials.map((social) => {
       if (!(social.icon in icons)) {
-        throw new Error(`resume.config.mjs: unknown social icon "${social.icon}". Choose one of: ${Object.keys(icons).join(", ")}.`);
+        throw new Error(`resume.config.ts: unknown social icon "${social.icon}". Choose one of: ${Object.keys(icons).join(", ")}.`);
       }
       return (
       <a

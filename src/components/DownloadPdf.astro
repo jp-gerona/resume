@@ -1,6 +1,6 @@
 ---
 import { getResumeUpdatedDate } from "@/utils/resumeUpdated";
-import config from "../../resume.config.mjs";
+import config from "../../resume.config.ts";
 
 const updatedDate = getResumeUpdatedDate();
 const updatedLabel = new Intl.DateTimeFormat(config.lang, {

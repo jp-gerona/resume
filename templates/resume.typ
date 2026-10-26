@@ -1,12 +1,12 @@
 #let resume = yaml("../src/content/resume/resume.yaml")
-// Set by scripts/build-resume.mjs from resume.config.mjs.
+// Set by scripts/build-resume.ts from resume.config.ts.
 #let font = sys.inputs.at("font", default: "EB Garamond")
 #let pages = sys.inputs.at("pages", default: "1")
 #let sections = json(bytes(sys.inputs.at("sections")))
 // Set by `npm run resume:private`: extra contact entries kept out of git and the site.
 #let private = if "private" in sys.inputs { yaml(sys.inputs.private) } else { (:) }
 #let contact = resume.contact + private.at("contact", default: ())
-// Exposes the parsed data to `typst query` for scripts/check-drift.mjs.
+// Exposes the parsed data to `typst query` for scripts/check-drift.ts.
 #metadata(resume) <resume-data>
 
 #set document(title: resume.title, author: resume.name)
@@ -114,6 +114,6 @@
 #if pages != "auto" {
   context assert(
     counter(page).final().first() <= int(pages),
-    message: "Resume must fit on " + pages + " page(s) (`pages` in resume.config.mjs). Shorten resume.yaml instead of shrinking the font.",
+    message: "Resume must fit on " + pages + " page(s) (`pages` in resume.config.ts). Shorten resume.yaml instead of shrinking the font.",
   )
 }

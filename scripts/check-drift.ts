@@ -4,30 +4,30 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import config from "../resume.config.mjs";
-import { compiler, typstInputs } from "./build-resume.mjs";
-import { defaultSections } from "./config.mjs";
+import config from "../resume.config.ts";
+import { compiler, typstInputs } from "./build-resume.ts";
+import { defaultSections } from "./config.ts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 // Page metadata, the sidebar role and link targets are not printed on both outputs.
 const skippedKeys = new Set(["title", "description", "role", "href"]);
-// Sections left out of resume.config.mjs are hidden on purpose.
+// Sections left out of resume.config.ts are hidden on purpose.
 for (const { id } of defaultSections) {
   if (!config.sections.some(section => section.id === id)) {
     skippedKeys.add(id);
   }
 }
 
-function run(command, args) {
+function run(command: string, args: string[]) {
   return execFileSync(command, args, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
 }
 
-function pdfText(file) {
+function pdfText(file: string) {
   try {
     return run("pdftotext", [file, "-"]);
   }
   catch (error) {
-    if (error.code !== "ENOENT") {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
       throw error;
     }
     // Ghostscript as a fallback where poppler is not installed.
@@ -35,12 +35,12 @@ function pdfText(file) {
   }
 }
 
-function htmlText(html) {
+function htmlText(html: string) {
   return html
     .replace(/<(script|style)[\s\S]*?<\/\1>/g, " ")
     .replace(/<[^>]+>/g, " ")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/&#x([\da-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
+    .replace(/&#(\d+);/g, (_, code: string) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([\da-f]+);/gi, (_, code: string) => String.fromCodePoint(Number.parseInt(code, 16)))
     .replace(/&quot;/g, "\"")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
@@ -48,7 +48,7 @@ function htmlText(html) {
 }
 
 // Typst prints smart quotes and the templates drop `*` emphasis markers.
-function normalize(text) {
+function normalize(text: string) {
   return text
     .replace(/[‘’]/g, "'")
     .replace(/[“”]/g, "\"")
@@ -58,7 +58,7 @@ function normalize(text) {
     .toLowerCase();
 }
 
-function collectStrings(value, key, out) {
+function collectStrings(value: unknown, key: string, out: string[]): string[] {
   if (skippedKeys.has(key)) {
     return out;
   }

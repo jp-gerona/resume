@@ -2,8 +2,8 @@
 import process from "node:process";
 import { defineConfig } from "astro/config";
 
-import config from "./resume.config.mjs";
-import { buildResume } from "./scripts/build-resume.mjs";
+import config from "./resume.config.ts";
+import { buildResume } from "./scripts/build-resume.ts";
 
 // A custom domain wins. Otherwise, inside GitHub Actions, fall back to the default
 // Pages URL: https://<owner>.github.io/<repo>/.

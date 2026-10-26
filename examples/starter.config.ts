@@ -1,6 +1,5 @@
-// @ts-check
-// This file is copied to resume.config.mjs by `npm run resume:init`, so the import path is relative to the repo root.
-import { defineConfig } from "./scripts/config.mjs";
+// This file is copied to resume.config.ts by `npm run resume:init`, so the import path is relative to the repo root.
+import { defineConfig } from "./scripts/config.ts";
 
 // Settings for the web page and PDF build. The content lives in src/content/resume/resume.yaml.
 export default defineConfig({

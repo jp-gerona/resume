@@ -1,6 +1,6 @@
 # Your resume. Both the web page and the PDF are generated from this file.
 # Wrap text in *asterisks* for italics. The PDF build fails when the
-# content overflows the `pages` limit in resume.config.mjs.
+# content overflows the `pages` limit in resume.config.ts.
 
 title: Resume
 description: Resume of Your Name, Your Role
