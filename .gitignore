@@ -8,6 +8,14 @@ node_modules/
 
 # logs
 pnpm-debug.log*
+npm-debug.log*
+yarn-error.log*
+
+# lockfiles of package managers other than pnpm
+package-lock.json
+yarn.lock
+bun.lock
+bun.lockb
 
 # environment variables
 .env

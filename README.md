@@ -13,17 +13,25 @@ Inspired by [antfu/resume](https://github.com/antfu/resume).
 
 ## Start your own
 
-You need Node.js 22+, pnpm and Typst 0.15.
+You need Node.js 22+, a package manager (npm, pnpm, yarn or bun) and Typst 0.15. Commands below use npm; swap in your own.
 
 ```sh
-pnpm create astro --template jp-gerona/resume my-resume
+npm create astro@latest -- --template jp-gerona/resume my-resume
 cd my-resume
-pnpm resume:init   # swap my resume for a blank starter
-pnpm dev           # web page at http://localhost:4321
-pnpm resume:pdf    # writes public/resume.pdf
+npm run resume:init   # swap my resume for a blank starter
+npm run dev           # web page at http://localhost:4321
+npm run resume:pdf    # writes public/resume.pdf
 ```
 
-You can also click **Use this template** on GitHub, or fork the repository and run `pnpm resume:init`.
+| Task    | npm                | pnpm            | yarn            | bun             |
+| ------- | ------------------ | --------------- | --------------- | --------------- |
+| Create  | `npm create astro@latest -- --template jp-gerona/resume` | `pnpm create astro --template jp-gerona/resume` | `yarn create astro --template jp-gerona/resume` | `bun create astro --template jp-gerona/resume` |
+| Install | `npm install`      | `pnpm install`  | `yarn`          | `bun install`   |
+| Script  | `npm run <script>` | `pnpm <script>` | `yarn <script>` | `bun run <script>` |
+
+The repository ships only `pnpm-lock.yaml`, so other managers resolve versions fresh. CI uses pnpm.
+
+You can also click **Use this template** on GitHub, or fork the repository and run `npm run resume:init`.
 
 Typst can come from `brew install typst`, `cargo install typst-cli` or the [releases page](https://github.com/typst/typst/releases). The build looks for `.tools/typst/typst` first, then `TYPST_BIN`, then `typst` on your `PATH`.
 
@@ -47,7 +55,7 @@ Set `sidebar.enabled: false` for a single column. The download link and update t
 
 Fonts are bundled, so the build and the page never call Google Fonts. `fonts.resume` (page text and PDF), `fonts.handle` and `fonts.ui` take a name from `scripts/fonts.mjs`; a wrong name fails the build and lists the options. To add a font, put its web subsets in `src/fonts/` and its TTFs in `templates/fonts/` (see the README there), then add an entry to `scripts/fonts.mjs`.
 
-If you add a section, add it to both `index.astro` and `resume.typ`. `pnpm build && pnpm check:drift` reports any YAML value missing from either output, and CI runs the same check.
+If you add a section, add it to both `index.astro` and `resume.typ`. `npm run build && npm run check:drift` reports any YAML value missing from either output, and CI runs the same check.
 
 ## Private details
 
@@ -55,7 +63,7 @@ Everything in this repository and in `public/` is published. Keep details you on
 
 ```sh
 cp resume.private.example.yaml resume.private.yaml   # git-ignored
-pnpm resume:private                                    # writes out/resume-private.pdf
+npm run resume:private                                 # writes out/resume-private.pdf
 ```
 
 Contact entries in `resume.private.yaml` are appended to the PDF's contact line. The web page and the deployed PDF never read the file. Once something is committed, it stays in git history even after you delete it.

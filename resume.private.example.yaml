@@ -1,4 +1,4 @@
-# Copy this file to resume.private.yaml (git-ignored) and run `pnpm resume:private`.
+# Copy this file to resume.private.yaml (git-ignored) and run `npm run resume:private`.
 # Contact entries here are appended to the PDF's contact line in out/resume-private.pdf.
 # The web page and the deployed PDF never read this file.
 contact:

@@ -3,7 +3,7 @@
 #let font = sys.inputs.at("font", default: "EB Garamond")
 #let pages = sys.inputs.at("pages", default: "1")
 #let sections = json(bytes(sys.inputs.at("sections")))
-// Set by `pnpm resume:private`: extra contact entries kept out of git and the site.
+// Set by `npm run resume:private`: extra contact entries kept out of git and the site.
 #let private = if "private" in sys.inputs { yaml(sys.inputs.private) } else { (:) }
 #let contact = resume.contact + private.at("contact", default: ())
 // Exposes the parsed data to `typst query` for scripts/check-drift.mjs.

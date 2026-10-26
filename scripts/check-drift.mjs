@@ -1,5 +1,5 @@
 // Fails when a resume.yaml value is missing from the built page or PDF, which
-// catches a section added to one template but not the other. Run after `pnpm build`.
+// catches a section added to one template but not the other. Run after `npm run build`.
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import process from "node:process";

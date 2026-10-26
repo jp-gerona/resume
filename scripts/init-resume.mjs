@@ -26,4 +26,4 @@ console.log(`Reset src/content/resume/resume.yaml and resume.config.mjs to the s
 Next steps:
   1. Fill in src/content/resume/resume.yaml and resume.config.mjs.
   2. Replace public/favicon.ico, public/apple-touch-icon.png and public/og-image.png.
-  3. Preview with \`pnpm dev\` and \`pnpm resume:pdf\`.`);
+  3. Preview with \`npm run dev\` and \`npm run resume:pdf\` (or your package manager's equivalent).`);
