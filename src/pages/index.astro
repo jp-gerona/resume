@@ -2,6 +2,7 @@
 import { getEntry } from "astro:content";
 import Profile from "@/components/Profile.astro";
 import ResumeText from "@/components/ResumeText.astro";
+import garamondLatin from "@/fonts/eb-garamond-latin.woff2?url";
 import { getResumeUpdatedDate } from "@/utils/resumeUpdated";
 import "@/styles/global.css";
 
@@ -21,8 +22,9 @@ const updatedLabel = new Intl.DateTimeFormat(resume.site.lang, {
 
 const pageTitle = `${resume.title} - ${resume.name}`;
 const pageDescription = resume.description ?? pageTitle;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL("/og-image.png", Astro.site).href;
+// Without a known site URL (local builds), absolute canonical and OG URLs are skipped.
+const canonicalURL = Astro.site && new URL(import.meta.env.BASE_URL.replace(/\/?$/, "/"), Astro.site);
+const ogImageURL = canonicalURL && new URL("og-image.png", canonicalURL).href;
 ---
 
 <!doctype html>
@@ -34,19 +36,19 @@ const ogImageURL = new URL("/og-image.png", Astro.site).href;
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="author" content={resume.name} />
-    <link rel="canonical" href={canonicalURL} />
+    {canonicalURL && <link rel="canonical" href={canonicalURL} />}
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
+    {canonicalURL && <meta property="og:url" content={canonicalURL} />}
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content={ogImageURL} />
+    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
     {resume.site.locale && <meta property="og:locale" content={resume.site.locale} />}
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="preload" href="/fonts/eb-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="preload" href={garamondLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to resume</a>
@@ -54,7 +56,7 @@ const ogImageURL = new URL("/og-image.png", Astro.site).href;
       <aside class="sidebar" aria-label="Profile">
         <Profile />
         <div>
-          <a class="text-link" href="/resume.pdf" download={resume.site.pdfFilename}>Download PDF</a>
+          <a class="text-link" href="resume.pdf" download={resume.site.pdfFilename}>Download PDF</a>
           <p class="updated">Updated <time datetime={updatedDate.toISOString()}>{updatedLabel}</time></p>
         </div>
       </aside>
