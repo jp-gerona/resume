@@ -11,6 +11,7 @@
     "check": "astro check",
     "resume:pdf": "node scripts/build-resume.mjs",
     "resume:private": "node scripts/build-resume.mjs --private",
+    "check:drift": "node scripts/check-drift.mjs",
     "astro": "astro"
   },
   "dependencies": {

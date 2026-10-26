@@ -25,8 +25,13 @@ jobs:
           echo "a6d077d0a95eed5a2eba715b2dae06be954f624ccbf85758a03f389ded33118c  $RUNNER_TEMP/typst.tar.xz" | sha256sum --check
           mkdir -p .tools/typst
           tar -xJf "$RUNNER_TEMP/typst.tar.xz" --strip-components=1 -C .tools/typst
+      - name: Install pdftotext for the drift check
+        run: sudo apt-get update && sudo apt-get install --yes poppler-utils
       - name: Install, build, and upload
         uses: withastro/action@v6
+      # Runs after the upload, but a failure here still blocks the deploy job.
+      - name: Check web page and PDF contain the same data
+        run: node scripts/check-drift.mjs
 
   deploy:
     needs: build

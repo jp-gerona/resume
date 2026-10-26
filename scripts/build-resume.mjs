@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const localCompiler = fileURLToPath(new URL("../.tools/typst/typst", import.meta.url));
-const compiler = process.env.TYPST_BIN || (existsSync(localCompiler) ? localCompiler : "typst");
+export const compiler = process.env.TYPST_BIN || (existsSync(localCompiler) ? localCompiler : "typst");
 const privateData = "resume.private.yaml";
 
 /**
