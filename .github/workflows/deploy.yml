@@ -48,6 +48,8 @@ jobs:
       - name: Install pdftotext for the drift check
         run: sudo apt-get update && sudo apt-get install --yes poppler-utils
       - uses: pnpm/action-setup@v6
+        with:
+          version: 11.13.1
       - uses: actions/setup-node@v7
         with:
           node-version: 24
