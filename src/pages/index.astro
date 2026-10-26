@@ -2,7 +2,6 @@
 import { getEntry } from "astro:content";
 import Profile from "@/components/Profile.astro";
 import ResumeText from "@/components/ResumeText.astro";
-import { siteConfig } from "@/site.config";
 import { getResumeUpdatedDate } from "@/utils/resumeUpdated";
 import "@/styles/global.css";
 
@@ -12,7 +11,7 @@ if (!entry) {
 }
 const resume = entry.data;
 const updatedDate = getResumeUpdatedDate();
-const updatedLabel = new Intl.DateTimeFormat(siteConfig.lang, {
+const updatedLabel = new Intl.DateTimeFormat(resume.site.lang, {
   year: "numeric",
   month: "long",
   day: "numeric",
@@ -27,7 +26,7 @@ const ogImageURL = new URL("/og-image.png", Astro.site).href;
 ---
 
 <!doctype html>
-<html lang={siteConfig.lang}>
+<html lang={resume.site.lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,7 +41,7 @@ const ogImageURL = new URL("/og-image.png", Astro.site).href;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:locale" content={siteConfig.ogLocale} />
+    {resume.site.locale && <meta property="og:locale" content={resume.site.locale} />}
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preload" href="/fonts/eb-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -55,7 +54,7 @@ const ogImageURL = new URL("/og-image.png", Astro.site).href;
       <aside class="sidebar" aria-label="Profile">
         <Profile />
         <div>
-          <a class="text-link" href="/resume.pdf" download={siteConfig.pdfFilename}>Download PDF</a>
+          <a class="text-link" href="/resume.pdf" download={resume.site.pdfFilename}>Download PDF</a>
           <p class="updated">Updated <time datetime={updatedDate.toISOString()}>{updatedLabel}</time></p>
         </div>
       </aside>

@@ -1,6 +1,7 @@
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { defineCollection } from "astro:content";
+import { iconNames } from "@/icons";
 
 const projectSchema = z.object({
   name: z.string(),
@@ -35,7 +36,21 @@ const affiliationSchema = z.object({
   highlights: z.array(z.string()).min(1),
 });
 
+const siteSchema = z.object({
+  handle: z.string(),
+  website: z.url().optional(),
+  lang: z.string().default("en"),
+  locale: z.string().optional(),
+  pdfFilename: z.string().default("resume.pdf"),
+  socials: z.array(z.object({
+    label: z.string(),
+    href: z.url(),
+    icon: z.enum(iconNames),
+  })).default([]),
+});
+
 export const resumeSchema = z.object({
+  site: siteSchema,
   title: z.string(),
   description: z.string().optional(),
   name: z.string(),
