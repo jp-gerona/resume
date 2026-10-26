@@ -1,0 +1,23 @@
+{
+  "name": "resume",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.13.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "resume:pdf": "node scripts/build-resume.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "astro": "^7.4.2",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2"
+  }
+}

@@ -1,0 +1,112 @@
+title: Resume
+description: Resume of Julian Peter Gerona, Software Engineer
+name: Julian Peter Gerona
+role: Software Engineer
+contact:
+  - text: Calamba City, Laguna
+  - text: jp-gerona@protonmail.com
+    href: mailto:jp-gerona@protonmail.com
+  - text: linkedin.com/in/jp-gerona
+    href: https://www.linkedin.com/in/jp-gerona/
+  - text: github.com/jp-gerona
+    href: https://github.com/jp-gerona
+education:
+  - institution: MAPÚA MALAYAN COLLEGES LAGUNA
+    location: Cabuyao, Laguna
+    credential: BS Information Technology, Specializing in Cybersecurity
+    period: August 2022 – 2026
+    details:
+      - "Running General Weighted Average: 1.48 (1.00 scale)"
+      - "President's Lister, 2022–2023; Dean's Lister, 2022–2026"
+      - >-
+        Relevant Coursework: Applied Cryptography, Ethical Hacking, Information Security and Assurance,
+        Systems Integration and Architectures, Web Systems and Technologies, HCI and UI/UX,
+        Data Structures and Algorithms Analysis
+experience:
+  - organization: CITY GOVERNMENT OF BIÑAN – ICT OFFICE
+    location: Biñan, Laguna
+    role: Software Engineer Intern
+    period: April 2026 – Present
+    highlights:
+      - >-
+        Engineered the Biñan Access Card MIS with PHP CodeIgniter 4 stack for the City Social Welfare
+        and Development Office (CSWDO), centralizing census profiling and demographic tracking for
+        100,000+ families across 24 barangays.
+      - >-
+        Built spatial and data analytics dashboards utilizing Chart.js and PSGC shapefiles converted
+        to SVG, providing city administrators with real-time demographic distributions and event
+        throughput metrics.
+      - >-
+        Designed subsidy distribution workflows to verify beneficiary eligibility and disburse aid
+        for municipal and national programs, including 4Ps and Senior Citizen pensions.
+      - >-
+        Deployed offline local-network QR verification pipelines across 15–20 concurrent scanner
+        stations, eliminating external internet dependency during multi-day payout events and
+        preventing duplicate disbursements.
+  - organization: CREOTEC PHILIPPINES
+    location: Remote
+    role: Work Immersion Trainee
+    period: April 2021
+    highlights:
+      - Built two Android applications for employee payroll and attendance records in MIT App Inventor.
+      - Awarded Best in Work Immersion for the STEM strand.
+projects:
+  - name: STREAMLINE (Capstone Project)
+    year: "2026"
+    highlights:
+      - >-
+        Led a 4-person team building a full-stack geospatial and visualization platform for the
+        Laguna Lake Development Authority (LLDA), fusing LoRa IoT sensor telemetry with satellite
+        raster data on an interactive MapLibre GL and deck.gl map.
+      - >-
+        Architected the stack on React 19 and Django REST Framework over PostGIS, serving satellite
+        raster layers from Cloudflare R2 object storage.
+      - >-
+        Delivered the full monitoring workflow: water quality dashboard, government-to-government
+        management, and automated report generation scheduling via cron workers.
+      - >-
+        Applied SAST and DAST practices against the OWASP Top 10 via Zed Attack Proxy (ZAP) and
+        GitHub Actions to secure the web application.
+  - name: MMCL SPARK
+    year: "2025"
+    highlights:
+      - >-
+        Led a 4-person team building a native Android student enrollment portal in Kotlin and
+        Jetpack Compose over a REST/PHP backend via Ktor, including a conflict-free schedule
+        suggester generating non-overlapping section combinations from enlisted courses.
+      - >-
+        Covered the full enrollment cycle from enlistment and sectioning through billing and
+        grades, with a hand-built weekly timetable that merges overlapping class events against
+        a live clock.
+  - name: GITGUD
+    year: "2026"
+    highlights:
+      - >-
+        Built a terminal UI developer tool for git version control in Rust using Ratatui and
+        Crossterm as a personal productivity project.
+      - >-
+        Implemented hunk-level staging through git apply patches and a modal vi-style commit
+        editor to familiarize with Vim motions.
+affiliations:
+  - organization: CYBERSECURITY SOCIETY OF THE PHILIPPINES (CyberSocPH)
+    period: Member, 2026
+    highlights:
+      - Recognized as a Member in Good Standing of the national professional society for cybersecurity practitioners.
+  - organization: MAPÚA MCL INFOTECH SOCIETY (ITSOC)
+    period: Member, 2025
+    highlights:
+      - >-
+        Trained in GIS fundamentals and QGIS workflows at the society's *Actionable Insights*
+        remote sensing and geomapping workshop.
+skills:
+  - category: Technical Skills
+    text: >-
+      Proficient in TypeScript, Python, PHP, SQL; React, Next.js, Node.js, Django, CodeIgniter 4,
+      Tailwind CSS; PostgreSQL, MySQL, Figma. Familiar with Rust, Godot, Kotlin, Jetpack Compose,
+      Docker, GitHub Actions, and Cloudflare R2.
+  - category: Certifications
+    text: >-
+      CompTIA Tech+; Cisco CCNA: Introduction to Networks; Cisco Ethical Hacker; Google Cloud
+      Computing Foundations; Amazon Full Stack Web Development; Infosec Advanced Python
+  - category: Languages
+    text: Filipino (native), English (fluent)
