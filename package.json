@@ -12,6 +12,7 @@
     "resume:pdf": "node scripts/build-resume.mjs",
     "resume:private": "node scripts/build-resume.mjs --private",
     "check:drift": "node scripts/check-drift.mjs",
+    "resume:init": "node scripts/init-resume.mjs",
     "astro": "astro"
   },
   "dependencies": {

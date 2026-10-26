@@ -33,8 +33,32 @@ jobs:
       - name: Check web page and PDF contain the same data
         run: node scripts/check-drift.mjs
 
+  # Builds the blank starter so it keeps matching the schema and both templates.
+  starter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Install Typst 0.15.1
+        run: |
+          curl --fail --location --silent --show-error https://github.com/typst/typst/releases/download/v0.15.1/typst-x86_64-unknown-linux-musl.tar.xz --output "$RUNNER_TEMP/typst.tar.xz"
+          echo "a6d077d0a95eed5a2eba715b2dae06be954f624ccbf85758a03f389ded33118c  $RUNNER_TEMP/typst.tar.xz" | sha256sum --check
+          mkdir -p .tools/typst
+          tar -xJf "$RUNNER_TEMP/typst.tar.xz" --strip-components=1 -C .tools/typst
+      - name: Install pdftotext for the drift check
+        run: sudo apt-get update && sudo apt-get install --yes poppler-utils
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm resume:init --yes
+      - run: pnpm build
+      - run: pnpm check:drift
+
   deploy:
-    needs: build
+    needs: [build, starter]
     runs-on: ubuntu-latest
     environment:
       name: github-pages

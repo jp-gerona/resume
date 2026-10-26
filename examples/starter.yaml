@@ -1,0 +1,73 @@
+# Your resume. Both the web page and the PDF are generated from this file.
+# Wrap text in *asterisks* for italics. Keep it to one page: the PDF build
+# fails when the content overflows.
+
+# Web page settings (not printed on the PDF).
+site:
+  handle: your-handle # large name at the top of the sidebar
+  website: https://example.com # optional, adds a globe link next to the socials
+  lang: en
+  locale: en_US # optional, used for og:locale
+  pdfFilename: Your-Name-Resume.pdf # filename of the "Download PDF" link
+  # icon: github, gitlab, linkedin, x, bluesky, mastodon, youtube, instagram, dribbble, mail, globe
+  socials:
+    - label: GitHub
+      href: https://github.com/your-handle
+      icon: github
+    - label: LinkedIn
+      href: https://www.linkedin.com/in/your-handle/
+      icon: linkedin
+
+title: Resume
+description: Resume of Your Name, Your Role
+name: Your Name
+role: Your Role # shown in the sidebar under the handle
+
+# Contact line under your name. The first mailto: link is also shown in the sidebar.
+# Keep private details (phone, address) in resume.private.yaml instead.
+contact:
+  - text: City, Country
+  - text: you@example.com
+    href: mailto:you@example.com
+  - text: linkedin.com/in/your-handle
+    href: https://www.linkedin.com/in/your-handle/
+  - text: github.com/your-handle
+    href: https://github.com/your-handle
+
+education:
+  - institution: UNIVERSITY NAME
+    location: City, Country
+    credential: Degree, Major
+    period: August 2022 – May 2026
+    details:
+      - "GPA: 3.80 / 4.00"
+      - "Relevant Coursework: Course One, Course Two, Course Three"
+
+experience:
+  - organization: COMPANY NAME
+    location: City, Country
+    role: Job Title
+    period: June 2025 – Present
+    highlights:
+      - Start with a verb, name the tools you used, and end with a measurable result.
+      - Built a feature in Tool A and Tool B that reduced load time by 40% for 10,000 users.
+
+# Optional: delete this section or leave it empty.
+projects:
+  - name: PROJECT NAME
+    year: "2025"
+    highlights:
+      - What you built, with what, and why it mattered.
+
+# Optional: delete this section or leave it empty.
+affiliations:
+  - organization: ORGANIZATION NAME
+    period: Member, 2025
+    highlights:
+      - What you did there.
+
+skills:
+  - category: Technical Skills
+    text: Language One, Language Two; Framework One, Framework Two; Tool One, Tool Two
+  - category: Languages
+    text: English (native)
