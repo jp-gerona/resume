@@ -1,12 +1,16 @@
 ---
 import { getEntry } from "astro:content";
 import Icon from "@/components/Icon.astro";
+import type { IconName } from "@/icons";
+import { icons } from "@/icons";
+import config from "../../resume.config.mjs";
 
 const entry = await getEntry("resume", "resume");
 if (!entry) {
   throw new Error("Missing resume content entry at src/content/resume/resume.yaml");
 }
-const { name, role, contact, site } = entry.data;
+const { name, role, contact } = entry.data;
+const site = config.sidebar;
 const email = contact.find(item => item.href?.startsWith("mailto:"));
 const websiteHost = site.website && new URL(site.website).hostname;
 ---
@@ -18,7 +22,11 @@ const websiteHost = site.website && new URL(site.website).hostname;
   <p class="role">{role}</p>
   {email && <a class="text-link email" href={email.href}>{email.text}</a>}
   <nav class="socials" aria-label="Profile links">
-    {site.socials.map(social => (
+    {site.socials.map((social) => {
+      if (!(social.icon in icons)) {
+        throw new Error(`resume.config.mjs: unknown social icon "${social.icon}". Choose one of: ${Object.keys(icons).join(", ")}.`);
+      }
+      return (
       <a
         href={social.href}
         title={`${social.label} @ ${site.handle}`}
@@ -26,9 +34,10 @@ const websiteHost = site.website && new URL(site.website).hostname;
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Icon name={social.icon} />
+        <Icon name={social.icon as IconName} />
       </a>
-    ))}
+      );
+    })}
     {site.website && (
       <a href={site.website} title="Website" aria-label="Website">
         <Icon name="globe" />

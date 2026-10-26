@@ -4,7 +4,7 @@ A one-page resume that builds into a static web page and an ATS-friendly PDF fro
 
 Live: [resume.jp-gerona.me](https://resume.jp-gerona.me)
 
-- **One source.** Everything lives in `src/content/resume/resume.yaml`, validated by a schema.
+- **One source.** Content lives in `src/content/resume/resume.yaml`, validated by a schema. Settings live in `resume.config.mjs`.
 - **Real PDF.** [Typst](https://typst.app) renders selectable, parseable text. No headless browser.
 - **Static page.** [Astro](https://astro.build) outputs plain HTML and CSS with zero client JavaScript.
 - **Private details stay private.** Phone numbers and similar go into a git-ignored file that only a local PDF build reads.
@@ -31,12 +31,21 @@ Typst can come from `brew install typst`, `cargo install typst-cli` or the [rele
 
 | File | What it controls |
 | --- | --- |
-| `src/content/resume/resume.yaml` | All content, plus the sidebar handle, socials and PDF filename under `site:` |
+| `src/content/resume/resume.yaml` | All content |
+| `resume.config.mjs` | Language, PDF filename, page limit, fonts, and the sidebar (on/off, handle, website, socials) |
 | `src/pages/index.astro` | Web page layout and styles |
 | `templates/resume.typ` | PDF layout |
 | `public/favicon.ico`, `public/apple-touch-icon.png`, `public/og-image.png` | Icons and social preview image, replace with your own |
 
-`projects` and `affiliations` are optional. The PDF build fails if the content no longer fits on one page.
+`projects` and `affiliations` are optional. The PDF build fails if the content exceeds `pages` in `resume.config.mjs`, which is `1` by default. Set it to a higher number, or `"auto"` for no limit.
+
+`paper` sets the PDF size (`"us-letter"` or `"a4"`) and does not affect the web page. `sections` lists the sections to show, in order. Leave one out to hide it, or write `{ id: "experience", title: "Employment" }` to rename it.
+
+Set `sidebar.enabled: false` for a single column. The download link and update time then move below the resume.
+
+### Fonts
+
+Fonts are bundled, so the build and the page never call Google Fonts. `fonts.resume` (page text and PDF), `fonts.handle` and `fonts.ui` take a name from `scripts/fonts.mjs`; a wrong name fails the build and lists the options. To add a font, put its web subsets in `src/fonts/` and its TTFs in `templates/fonts/` (see the README there), then add an entry to `scripts/fonts.mjs`.
 
 If you add a section, add it to both `index.astro` and `resume.typ`. `pnpm build && pnpm check:drift` reports any YAML value missing from either output, and CI runs the same check.
 
@@ -56,11 +65,7 @@ Contact entries in `resume.private.yaml` are appended to the PDF's contact line.
 1. In the repository settings, set **Pages > Source** to **GitHub Actions**.
 2. Push to `main`. The workflow builds the page and PDF, runs the drift check and deploys.
 
-Without a custom domain the site goes to `https://<user>.github.io/<repo>/`. For a custom domain:
-
-1. Put the domain in `public/CNAME`, for example `resume.example.com`.
-2. Add a DNS `CNAME` record pointing to `<user>.github.io`.
-3. Verify the domain under your GitHub account's **Settings > Pages** to prevent takeover, then enable **Enforce HTTPS**.
+The site goes to `https://<user>.github.io/<repo>/`.
 
 ## License
 

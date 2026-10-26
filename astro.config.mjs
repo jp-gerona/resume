@@ -1,13 +1,13 @@
 // @ts-check
-import { existsSync, readFileSync } from "node:fs";
 import process from "node:process";
 import { defineConfig } from "astro/config";
 
+import config from "./resume.config.mjs";
 import { buildResume } from "./scripts/build-resume.mjs";
 
-// A custom domain in public/CNAME wins. Otherwise, inside GitHub Actions, fall back to
-// the default Pages URL: https://<owner>.github.io/<repo>/.
-const cname = existsSync("public/CNAME") ? readFileSync("public/CNAME", "utf8").trim() : "";
+// A custom domain wins. Otherwise, inside GitHub Actions, fall back to the default
+// Pages URL: https://<owner>.github.io/<repo>/.
+const cname = config.domain ?? "";
 const [owner, repo] = (process.env.GITHUB_REPOSITORY ?? "").split("/");
 const isUserSite = repo === `${owner}.github.io`;
 

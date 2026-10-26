@@ -4,11 +4,19 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import { compiler } from "./build-resume.mjs";
+import config from "../resume.config.mjs";
+import { compiler, typstInputs } from "./build-resume.mjs";
+import { defaultSections } from "./config.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-// Web-only settings, page metadata and link targets are not printed on both outputs.
-const skippedKeys = new Set(["site", "title", "description", "role", "href"]);
+// Page metadata, the sidebar role and link targets are not printed on both outputs.
+const skippedKeys = new Set(["title", "description", "role", "href"]);
+// Sections left out of resume.config.mjs are hidden on purpose.
+for (const { id } of defaultSections) {
+  if (!config.sections.some(section => section.id === id)) {
+    skippedKeys.add(id);
+  }
+}
 
 function run(command, args) {
   return execFileSync(command, args, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
@@ -68,6 +76,7 @@ function collectStrings(value, key, out) {
 
 const data = JSON.parse(run(compiler, [
   "query",
+  ...typstInputs,
   "--root",
   root,
   "--font-path",

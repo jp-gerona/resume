@@ -1,22 +1,6 @@
 # Your resume. Both the web page and the PDF are generated from this file.
-# Wrap text in *asterisks* for italics. Keep it to one page: the PDF build
-# fails when the content overflows.
-
-# Web page settings (not printed on the PDF).
-site:
-  handle: your-handle # large name at the top of the sidebar
-  website: https://example.com # optional, adds a globe link next to the socials
-  lang: en
-  locale: en_US # optional, used for og:locale
-  pdfFilename: Your-Name-Resume.pdf # filename of the "Download PDF" link
-  # icon: github, gitlab, linkedin, x, bluesky, mastodon, youtube, instagram, dribbble, mail, globe
-  socials:
-    - label: GitHub
-      href: https://github.com/your-handle
-      icon: github
-    - label: LinkedIn
-      href: https://www.linkedin.com/in/your-handle/
-      icon: linkedin
+# Wrap text in *asterisks* for italics. The PDF build fails when the
+# content overflows the `pages` limit in resume.config.mjs.
 
 title: Resume
 description: Resume of Your Name, Your Role

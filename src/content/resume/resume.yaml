@@ -1,17 +1,3 @@
-# Web page settings (not printed on the PDF).
-site:
-  handle: jp-gerona
-  website: https://jp-gerona.me
-  lang: en
-  locale: en_PH
-  pdfFilename: Julian-Peter-Gerona-Resume.pdf
-  socials:
-    - label: GitHub
-      href: https://github.com/jp-gerona
-      icon: github
-    - label: LinkedIn
-      href: https://www.linkedin.com/in/jp-gerona/
-      icon: linkedin
 title: Resume
 description: Resume of Julian Peter Gerona, Software Engineer
 name: Julian Peter Gerona

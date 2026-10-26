@@ -2,10 +2,21 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync } from "node:fs";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+import config from "../resume.config.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const localCompiler = fileURLToPath(new URL("../.tools/typst/typst", import.meta.url));
 export const compiler = process.env.TYPST_BIN || (existsSync(localCompiler) ? localCompiler : "typst");
+
+/** Settings the Typst template reads from `sys.inputs`. */
+export const typstInputs = Object.entries({
+  font: config.fonts.resume,
+  pages: config.pages,
+  lang: config.lang,
+  paper: config.paper,
+  sections: JSON.stringify(config.sections),
+}).flatMap(([key, value]) => ["--input", `${key}=${value}`]);
+
 const privateData = "resume.private.yaml";
 
 /**
@@ -16,7 +27,7 @@ const privateData = "resume.private.yaml";
 export function buildResume({ isPrivate = false } = {}) {
   const outDir = isPrivate ? "out" : "public";
   const output = `${outDir}/${isPrivate ? "resume-private.pdf" : "resume.pdf"}`;
-  const inputs = [];
+  const inputs = [...typstInputs];
 
   if (isPrivate) {
     if (!existsSync(new URL(`../${privateData}`, import.meta.url))) {
