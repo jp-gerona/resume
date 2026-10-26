@@ -1,4 +1,7 @@
 #let resume = yaml("../src/content/resume/resume.yaml")
+// Set by `pnpm resume:private`: extra contact entries kept out of git and the site.
+#let private = if "private" in sys.inputs { yaml(sys.inputs.private) } else { (:) }
+#let contact = resume.contact + private.at("contact", default: ())
 
 #set document(title: resume.title, author: resume.name)
 #set page(
@@ -44,9 +47,9 @@
 
 #heading(level: 1, resume.name)
 #align(center, text(size: 9.4pt)[
-  #for (index, contact) in resume.contact.enumerate() {
+  #for (index, item) in contact.enumerate() {
     if index > 0 [ | ]
-    if "href" in contact { link(contact.href, contact.text) } else { contact.text }
+    if "href" in item { link(item.href, item.text) } else { item.text }
   }
 ])
 

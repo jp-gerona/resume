@@ -19,3 +19,7 @@ pnpm-debug.log*
 # local Typst compiler and generated PDF
 .tools/
 public/resume.pdf
+
+# private resume data and PDF
+resume.private.yaml
+out/

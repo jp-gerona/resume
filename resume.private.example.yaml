@@ -1,0 +1,6 @@
+# Copy this file to resume.private.yaml (git-ignored) and run `pnpm resume:private`.
+# Contact entries here are appended to the PDF's contact line in out/resume-private.pdf.
+# The web page and the deployed PDF never read this file.
+contact:
+  - text: "+63 900 000 0000"
+    href: tel:+639000000000
