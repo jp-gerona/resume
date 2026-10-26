@@ -61,8 +61,8 @@ export const resumeSchema = z.object({
   })).min(1),
   education: z.array(educationSchema).min(1),
   experience: z.array(experienceSchema).min(1),
-  projects: z.array(projectSchema).min(1),
-  affiliations: z.array(affiliationSchema).min(1),
+  projects: z.array(projectSchema).default([]),
+  affiliations: z.array(affiliationSchema).default([]),
   skills: z.array(skillGroupSchema).min(1),
 });
 

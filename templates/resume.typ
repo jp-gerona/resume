@@ -70,20 +70,26 @@
   ]
 }
 
-#heading(level: 2, "Projects")
-#for (index, item) in resume.projects.enumerate() {
-  block(above: if index > 0 { 5.5pt } else { 0pt })[
-    #row(item.name, item.year, bold: true)
-    #bullets(item.highlights)
-  ]
+#let projects = resume.at("projects", default: ())
+#if projects.len() > 0 {
+  heading(level: 2, "Projects")
+  for (index, item) in projects.enumerate() {
+    block(above: if index > 0 { 5.5pt } else { 0pt })[
+      #row(item.name, item.year, bold: true)
+      #bullets(item.highlights)
+    ]
+  }
 }
 
-#heading(level: 2, "Affiliations")
-#for (index, item) in resume.affiliations.enumerate() {
-  block(above: if index > 0 { 5.5pt } else { 0pt })[
-    #row(item.organization, item.period, bold: true)
-    #bullets(item.highlights)
-  ]
+#let affiliations = resume.at("affiliations", default: ())
+#if affiliations.len() > 0 {
+  heading(level: 2, "Affiliations")
+  for (index, item) in affiliations.enumerate() {
+    block(above: if index > 0 { 5.5pt } else { 0pt })[
+      #row(item.organization, item.period, bold: true)
+      #bullets(item.highlights)
+    ]
+  }
 }
 
 #heading(level: 2, "Skills")

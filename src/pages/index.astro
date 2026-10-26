@@ -96,25 +96,29 @@ const ogImageURL = canonicalURL && new URL("og-image.png", canonicalURL).href;
           ))}
         </section>
 
-        <section aria-labelledby="projects">
-          <h2 id="projects">Projects</h2>
-          {resume.projects.map(item => (
-            <div class="entry">
-              <div class="row"><h3>{item.name}</h3><strong class="row-end">{item.year}</strong></div>
-              <ul>{item.highlights.map(highlight => <li><ResumeText text={highlight} /></li>)}</ul>
-            </div>
-          ))}
-        </section>
+        {resume.projects.length > 0 && (
+          <section aria-labelledby="projects">
+            <h2 id="projects">Projects</h2>
+            {resume.projects.map(item => (
+              <div class="entry">
+                <div class="row"><h3>{item.name}</h3><strong class="row-end">{item.year}</strong></div>
+                <ul>{item.highlights.map(highlight => <li><ResumeText text={highlight} /></li>)}</ul>
+              </div>
+            ))}
+          </section>
+        )}
 
-        <section aria-labelledby="affiliations">
-          <h2 id="affiliations">Affiliations</h2>
-          {resume.affiliations.map(item => (
-            <div class="entry">
-              <div class="row"><h3>{item.organization}</h3><strong class="row-end">{item.period}</strong></div>
-              <ul>{item.highlights.map(highlight => <li><ResumeText text={highlight} /></li>)}</ul>
-            </div>
-          ))}
-        </section>
+        {resume.affiliations.length > 0 && (
+          <section aria-labelledby="affiliations">
+            <h2 id="affiliations">Affiliations</h2>
+            {resume.affiliations.map(item => (
+              <div class="entry">
+                <div class="row"><h3>{item.organization}</h3><strong class="row-end">{item.period}</strong></div>
+                <ul>{item.highlights.map(highlight => <li><ResumeText text={highlight} /></li>)}</ul>
+              </div>
+            ))}
+          </section>
+        )}
 
         <section aria-labelledby="skills">
           <h2 id="skills">Skills</h2>
